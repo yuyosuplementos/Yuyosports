@@ -42,3 +42,6 @@ next-env.d.ts
 
 # scratch de migrate-images --dry-run
 scripts/.out/
+
+# .env.example sí se versiona: documenta las variables necesarias.
+!.env.example
