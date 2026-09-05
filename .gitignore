@@ -45,3 +45,7 @@ scripts/.out/
 
 # .env.example sí se versiona: documenta las variables necesarias.
 !.env.example
+
+# Config del MCP de Supabase: apunta a un project_ref concreto (hoy el de
+# prueba). Es config de herramienta local, no de la app.
+.mcp.json
