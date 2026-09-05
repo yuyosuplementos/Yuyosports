@@ -1,6 +1,8 @@
 -- Trigger compartido de updated_at.
+-- search_path vacio: la funcion no referencia tablas, y evita el secuestro
+-- de search_path por parte de quien dispare el trigger (linter 0011).
 create or replace function public.set_updated_at()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = '' as $$
 begin new.updated_at := now(); return new; end $$;
 
 create table public.products (
@@ -44,16 +46,20 @@ create trigger products_set_updated_at
   before update on public.products
   for each row execute function public.set_updated_at();
 
--- A 40 filas Postgres hace seq scan igual; estos indices son para cuando crezca.
-create index products_category_idx on public.products (category_id) where is_published;
-create index products_brand_idx    on public.products (brand_id)    where is_published;
-create index products_offer_idx    on public.products (is_offer)    where is_published and is_offer;
-create index products_order_idx    on public.products (sort_order, name);
+-- Indices de FK SIN filtro parcial: Postgres no indexa las FK solo, y el
+-- chequeo de `on delete restrict` al borrar una categoria o marca necesita
+-- cubrir todas las filas, no solo las publicadas.
+create index products_category_idx on public.products (category_id);
+create index products_brand_idx    on public.products (brand_id);
+
+-- Estos si son parciales: solo sirven al catalogo publico.
+create index products_offer_idx on public.products (is_offer) where is_published and is_offer;
+create index products_order_idx on public.products (sort_order, name);
 
 -- A partir de ~300-500 productos, cambiar el filtrado en cliente por
 -- paginacion server-side + FTS. El indice seria:
 --   create index products_search_idx on public.products
---     using gin (to_tsvector('spanish', unaccent(name || ' ' || description)));
+--     using gin (to_tsvector('spanish', extensions.unaccent(name || ' ' || description)));
 
 comment on column public.products.wholesale_price is
   'NOT NULL a proposito: en el sitio viejo un producto sin este campo rompia todo el render con un TypeError.';

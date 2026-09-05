@@ -7,13 +7,20 @@ create table public.admins (
   created_at timestamptz not null default now()
 );
 
-create or replace function public.is_admin()
-returns boolean
-language sql stable security definer set search_path = public
-as $$ select exists (select 1 from public.admins a where a.user_id = auth.uid()) $$;
+-- La funcion vive en un schema NO expuesto por PostgREST: siendo
+-- security definer, dejarla en `public` la publicaria como endpoint RPC.
+-- search_path vacio + nombres calificados evita el secuestro de search_path.
+create schema if not exists private;
+revoke all on schema private from public, anon, authenticated;
 
-revoke all on function public.is_admin() from public, anon;
-grant execute on function public.is_admin() to authenticated;
+create or replace function private.is_admin()
+returns boolean
+language sql stable security definer set search_path = ''
+as $$ select exists (select 1 from public.admins a where a.user_id = (select auth.uid())) $$;
+
+revoke all on function private.is_admin() from public, anon;
+grant usage on schema private to authenticated;
+grant execute on function private.is_admin() to authenticated;
 
 alter table public.products   enable row level security;
 alter table public.categories enable row level security;
@@ -32,24 +39,24 @@ create policy settings_public_read on public.settings
   for select to anon, authenticated using (true);
 
 -- ---------- ESCRITURA SOLO ADMIN ----------
--- OJO: `(select public.is_admin())` y no `public.is_admin()` a secas.
+-- OJO: `(select private.is_admin())` y no `private.is_admin()` a secas.
 -- El parentesis lo convierte en InitPlan: Postgres lo evalua UNA vez por query
 -- en lugar de una vez por fila. Es el patron de performance recomendado en RLS.
 create policy products_admin_all on public.products
   for all to authenticated
-  using ((select public.is_admin())) with check ((select public.is_admin()));
+  using ((select private.is_admin())) with check ((select private.is_admin()));
 
 create policy categories_admin_all on public.categories
   for all to authenticated
-  using ((select public.is_admin())) with check ((select public.is_admin()));
+  using ((select private.is_admin())) with check ((select private.is_admin()));
 
 create policy brands_admin_all on public.brands
   for all to authenticated
-  using ((select public.is_admin())) with check ((select public.is_admin()));
+  using ((select private.is_admin())) with check ((select private.is_admin()));
 
 create policy settings_admin_write on public.settings
   for all to authenticated
-  using ((select public.is_admin())) with check ((select public.is_admin()));
+  using ((select private.is_admin())) with check ((select private.is_admin()));
 
 -- Cada admin ve solo su propia fila. Nadie inserta desde la app:
 -- el admin inicial se crea con scripts/create-admin.ts (service_role).
