@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Portados 1:1 del `tailwind.config` inline de index.html.
+   En v3 esto vivia en un objeto JS separado del markup, y esa desincronizacion
+   fue justo el origen de las "clases fantasma" (bg-brand-green, shadow-neon,
+   bg-brand-dark...) que el JS viejo aplicaba y Tailwind nunca generaba.
+   Mapeo historico: green->live, black->charcoal, dark|card->stone, muted->moss.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-brand-live:     #a4c629; /* Protagonista: CTAs, badges */
+  --color-brand-charcoal: #3c3c3c; /* Textos, titulos, fondos oscuros */
+  --color-brand-moss:     #5a783a; /* Secundario: hover, texto sobre blanco */
+  --color-brand-stone:    #f2f2f2; /* Fondos secundarios, separaciones */
+  --color-brand-white:    #ffffff;
+
+  --font-sans:    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft:    0 4px 20px rgba(60, 60, 60, 0.05);
+  --shadow-soft-lg: 0 12px 30px rgba(60, 60, 60, 0.08);
+  --shadow-card:    0 2px 10px rgba(0, 0, 0, 0.03);
+  --shadow-hover:   0 15px 35px rgba(164, 198, 41, 0.15);
+}
+
+body {
+  background-color: var(--color-brand-white);
+  color: var(--color-brand-charcoal);
+}
+
+/* Scrollbar (portado de index.html:55-67) */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f2f2f2; }
+::-webkit-scrollbar-thumb { background: #3c3c3c; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #a4c629; }
+
+/* Zoom de imagen en hover */
+.img-zoom-container { overflow: hidden; }
+.img-zoom-container img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.img-zoom-container:hover img { transform: scale(1.05); }
+
+/* Carrusel de promos */
+.promo-slide {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.4s ease;
+}
+.promo-slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
+.promo-slide.exit   { opacity: 0; visibility: hidden;  transform: translateY(-15px); }
+
+.btn-premium { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.btn-premium:active { transform: scale(0.97); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .promo-slide, .img-zoom-container img, .btn-premium {
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "yuyo-sports",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "seed:images": "tsx scripts/migrate-images.ts",
+    "seed:images:dry": "tsx scripts/migrate-images.ts --dry-run",
+    "seed:products": "tsx scripts/seed-products.ts",
+    "seed:settings": "tsx scripts/seed-settings.ts",
+    "create:admin": "tsx scripts/create-admin.ts",
+    "test": "tsx scripts/test/whatsapp-parity.ts && tsx scripts/test/filters-parity.ts",
+    "test:whatsapp": "tsx scripts/test/whatsapp-parity.ts",
+    "test:filters": "tsx scripts/test/filters-parity.ts",
+    "gen:seed": "node scripts/gen-seed.mjs"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@fortawesome/react-fontawesome": "^3.5.0",
+    "@hookform/resolvers": "^5.9.1",
+    "@supabase/ssr": "^0.12.6",
+    "@supabase/supabase-js": "^2.115.0",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-hook-form": "^7.87.0",
+    "zod": "^4.5.4",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.13",
+    "typescript": "^5"
+  }
+}

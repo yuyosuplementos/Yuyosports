@@ -1,0 +1,630 @@
+[
+  {
+    "name": "BCAA 2000 Star Nutrition",
+    "brand": "Star Nutrition",
+    "category": "Aminoácidos",
+    "price": 15000,
+    "oldPrice": 18000,
+    "wholesalePrice": 12000,
+    "image": "img/BCAA 2000 Star Nutrition.jpg",
+    "description": "Aminoácidos de cadena ramificada de alta pureza.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Neutro",
+      "Naranja"
+    ]
+  },
+  {
+    "name": "Carnitina Pro - ENA",
+    "brand": "ENA",
+    "category": "Quemadores",
+    "price": 12000,
+    "oldPrice": 14500,
+    "wholesalePrice": 9500,
+    "image": "img/CARNITINA Pro - ENA.jpg",
+    "description": "L-Carnitina líquida para potenciar la quema de grasas.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Limón"
+    ]
+  },
+  {
+    "name": "Chia Pudding Granger 280g",
+    "brand": "Granger",
+    "category": "Snacks",
+    "price": 4500,
+    "wholesalePrice": 3500,
+    "image": "img/Chia Pudding Granger 280g.jpg",
+    "description": "Pudding de chía alto en proteína y bajo en carbohidratos.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Vainilla",
+      "Chocolate"
+    ]
+  },
+  {
+    "name": "Citrato De Magnesio - ENA",
+    "brand": "ENA",
+    "category": "Minerales",
+    "price": 8000,
+    "wholesalePrice": 6500,
+    "image": "img/Citrato De Magnesio - ENA.jpg",
+    "description": "Magnesio de alta asimilación para recuperación muscular.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Citrato De Magnesio - Star Nutrition 60cap",
+    "brand": "Star Nutrition",
+    "category": "Minerales",
+    "price": 8500,
+    "oldPrice": 9500,
+    "wholesalePrice": 6800,
+    "image": "img/Citrato De Magnesio - Star Nutrition 60cap.jpg",
+    "description": "Magnesio en cápsulas para mejor descanso y recuperación.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Citrato De Magnesio X-BODY 120 Caps",
+    "brand": "X-BODY",
+    "category": "Minerales",
+    "price": 11000,
+    "wholesalePrice": 8500,
+    "image": "img/Citrato De Magnesio X-BODY 120 Caps.jpg",
+    "description": "Magnesio de alta concentración, 120 cápsulas.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Colágeno One Fit 240g",
+    "brand": "One Fit",
+    "category": "Colágeno",
+    "price": 16000,
+    "wholesalePrice": 12500,
+    "image": "img/Colageno One Fit 240g.jpg",
+    "description": "Colágeno hidrolizado con vitamina C para articulaciones.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Naranja"
+    ]
+  },
+  {
+    "name": "Colágeno Plus Star Nutrition 360gr",
+    "brand": "Star Nutrition",
+    "category": "Colágeno",
+    "price": 19500,
+    "oldPrice": 23000,
+    "wholesalePrice": 15000,
+    "image": "img/Colageno Plus Star Nutrition 360gr.jpg",
+    "description": "Fórmula plus con ácido hialurónico y vitamina C.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Naranja"
+    ]
+  },
+  {
+    "name": "Colágeno Star Nutrition 210gr",
+    "brand": "Star Nutrition",
+    "category": "Colágeno",
+    "price": 14000,
+    "wholesalePrice": 11000,
+    "image": "img/Colageno Star Nutrition 210gr.jpg",
+    "description": "Colágeno hidrolizado puro, ideal para piel y articulaciones.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Cookies Proteicas Granger",
+    "brand": "Granger",
+    "category": "Snacks",
+    "price": 3000,
+    "wholesalePrice": 2200,
+    "image": "img/Cookies Proteicas Granger.jpg",
+    "description": "Galletas altas en proteína, sin azúcar agregada.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Chips de Chocolate"
+    ]
+  },
+  {
+    "name": "Creatina ENA Sabores 300g",
+    "brand": "ENA",
+    "category": "Creatina",
+    "price": 21000,
+    "oldPrice": 24000,
+    "wholesalePrice": 17000,
+    "image": "img/Creatina ENA Sabores 300g.jpg",
+    "description": "Creatina monohidrato saborizada, máxima pureza.",
+    "isGym": true,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Fruit Punch",
+      "Uva"
+    ]
+  },
+  {
+    "name": "Creatina Masticable GOMEX 120 Und.",
+    "brand": "GOMEX",
+    "category": "Creatina",
+    "price": 18000,
+    "wholesalePrice": 14000,
+    "image": "img/Creatina Masticable GOMEX 120 Und..jpg",
+    "description": "Creatina en gomitas masticables, fácil de tomar.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Frutilla"
+    ]
+  },
+  {
+    "name": "Creatina Masticable Gentech",
+    "brand": "Gentech",
+    "category": "Creatina",
+    "price": 15000,
+    "wholesalePrice": 11500,
+    "image": "img/Creatina Masticable Gentech.jpg",
+    "description": "Creatina en tabletas masticables para llevar a todos lados.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Naranja"
+    ]
+  },
+  {
+    "name": "Creatina One Fit 200gr",
+    "brand": "One Fit",
+    "category": "Creatina",
+    "price": 14000,
+    "wholesalePrice": 10500,
+    "image": "img/Creatina One Fit 200gr.jpg",
+    "description": "Creatina pura micronizada, 200g.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Neutro"
+    ]
+  },
+  {
+    "name": "Creatina One Fit 500gr",
+    "brand": "One Fit",
+    "category": "Creatina",
+    "price": 28000,
+    "oldPrice": 32000,
+    "wholesalePrice": 22000,
+    "image": "img/Creatina One Fit 500gr.jpg",
+    "description": "Creatina pura micronizada, formato ahorro 500g.",
+    "isGym": true,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Neutro"
+    ]
+  },
+  {
+    "name": "Creatina Star Nutrition 500g",
+    "brand": "Star Nutrition",
+    "category": "Creatina",
+    "price": 30000,
+    "wholesalePrice": 24000,
+    "image": "img/Creatina Star Nutrition 500g.jpg",
+    "description": "Creatina 100% pura y testeada, máxima calidad.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Neutro"
+    ]
+  },
+  {
+    "name": "Creatina Star Nutrition Doypack 300gr",
+    "brand": "Star Nutrition",
+    "category": "Creatina",
+    "price": 19000,
+    "wholesalePrice": 15000,
+    "image": "img/Creatina Star Nutrition Doypack 300gr.jpg",
+    "description": "Creatina en envase doypack, 300g.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Neutro"
+    ]
+  },
+  {
+    "name": "Gel Energy Pont 43gr",
+    "brand": "Pont",
+    "category": "Energía",
+    "price": 1500,
+    "wholesalePrice": 1100,
+    "image": "img/Gel Energy Pont 43gr.jpg",
+    "description": "Gel energético de rápida asimilación para deportes de resistencia.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Limón",
+      "Manzana"
+    ]
+  },
+  {
+    "name": "Gelatina Granger 150g",
+    "brand": "Granger",
+    "category": "Snacks",
+    "price": 3500,
+    "wholesalePrice": 2600,
+    "image": "img/Gelatina Granger 150g.jpg",
+    "description": "Gelatina proteica sin azúcar.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Frutilla",
+      "Cereza"
+    ]
+  },
+  {
+    "name": "Glisinato Magnesio Gold",
+    "brand": "Gold",
+    "category": "Minerales",
+    "price": 12500,
+    "oldPrice": 14000,
+    "wholesalePrice": 9500,
+    "image": "img/Glisinato Magnesio Gold.jpg",
+    "description": "Glicinato de magnesio de alta absorción.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Multivitamínico One Fit 60 cap",
+    "brand": "One Fit",
+    "category": "Vitaminas",
+    "price": 7500,
+    "wholesalePrice": 5500,
+    "image": "img/Multivitaminico One Fit 60 cap.jpg",
+    "description": "Complejo multivitamínico completo diario.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "NAD+ Gold",
+    "brand": "Gold",
+    "category": "Vitaminas",
+    "price": 25000,
+    "wholesalePrice": 19000,
+    "image": "img/NAD+ Gold.jpg",
+    "description": "Suplemento antienvejecimiento y energía celular NAD+.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Nutremax - Hydromax 660g",
+    "brand": "Nutremax",
+    "category": "Energía",
+    "price": 14000,
+    "oldPrice": 16500,
+    "wholesalePrice": 10500,
+    "image": "img/Nutremax - Hydromax 660g.jpg",
+    "description": "Bebida isotónica para hidratación profunda.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Naranja",
+      "Limón"
+    ]
+  },
+  {
+    "name": "Omega 3 Star Nutrition",
+    "brand": "Star Nutrition",
+    "category": "Vitaminas",
+    "price": 11000,
+    "wholesalePrice": 8500,
+    "image": "img/Omega 3 Star Nutrition.jpg",
+    "description": "Aceite de pescado rico en EPA y DHA.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Omelette Proteico Granger",
+    "brand": "Granger",
+    "category": "Snacks",
+    "price": 5500,
+    "wholesalePrice": 4200,
+    "image": "img/Omelette Proteico Granger.jpg",
+    "description": "Preparado para omelette alto en proteínas.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Queso"
+    ]
+  },
+  {
+    "name": "Pancakes KETO Granger",
+    "brand": "Granger",
+    "category": "Snacks",
+    "price": 6000,
+    "wholesalePrice": 4500,
+    "image": "img/Pancakes KETO Granger.jpg",
+    "description": "Premezcla para pancakes keto, bajos en carbohidratos.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Vainilla"
+    ]
+  },
+  {
+    "name": "Pancakes Proteicos MOLE 450gr",
+    "brand": "MOLE",
+    "category": "Snacks",
+    "price": 7500,
+    "oldPrice": 9000,
+    "wholesalePrice": 5800,
+    "image": "img/Pancakes Proteicos MOLE 450gr.jpg",
+    "description": "Mix para panqueques proteicos súper esponjosos.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Vainilla",
+      "Chocolate"
+    ]
+  },
+  {
+    "name": "Proteína One Fit 2lb",
+    "brand": "One Fit",
+    "category": "Proteínas",
+    "price": 22000,
+    "wholesalePrice": 17500,
+    "image": "img/Proteina One Fit 2lb.jpg",
+    "description": "Whey Protein concentrado de alta calidad, 2lb.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Vainilla",
+      "Chocolate",
+      "Frutilla"
+    ]
+  },
+  {
+    "name": "Proteína Star Nutrition 2lb",
+    "brand": "Star Nutrition",
+    "category": "Proteínas",
+    "price": 29000,
+    "oldPrice": 34000,
+    "wholesalePrice": 23000,
+    "image": "img/Proteina Star Nutrition 2lb.jpg",
+    "description": "Proteína de suero premium. Excelente sabor y disolución.",
+    "isGym": true,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Vainilla",
+      "Chocolate",
+      "Cookies & Cream"
+    ]
+  },
+  {
+    "name": "Proteína Vegetal Gold 2lb",
+    "brand": "Gold",
+    "category": "Proteínas",
+    "price": 25000,
+    "wholesalePrice": 19500,
+    "image": "img/Proteina Vegetal Gold 2lb.jpg",
+    "description": "Blend de proteínas vegetales de alta digestibilidad.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Vainilla",
+      "Chocolate"
+    ]
+  },
+  {
+    "name": "Puré Proteico Granger 150g",
+    "brand": "Granger",
+    "category": "Snacks",
+    "price": 4000,
+    "wholesalePrice": 3000,
+    "image": "img/Pure Proteico Granger 150g.jpg",
+    "description": "Puré de papas instantáneo enriquecido con proteína.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Original"
+    ]
+  },
+  {
+    "name": "Resveratrol 500 Star Nutrition",
+    "brand": "Star Nutrition",
+    "category": "Vitaminas",
+    "price": 13000,
+    "oldPrice": 15000,
+    "wholesalePrice": 10000,
+    "image": "img/Resveratrol 500 Star Nutrition.jpg",
+    "description": "Potente antioxidante natural.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Salsa Mrs Taste",
+    "brand": "Mrs Taste",
+    "category": "Snacks",
+    "price": 4500,
+    "wholesalePrice": 3400,
+    "image": "img/Salsa Mrs Taste.jpg",
+    "description": "Salsas cero calorías y cero sodio para tus comidas.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Ketchup",
+      "Barbacoa",
+      "Mostaza"
+    ]
+  },
+  {
+    "name": "Thermo Fuel Max - Star Nutrition",
+    "brand": "Star Nutrition",
+    "category": "Quemadores",
+    "price": 16000,
+    "wholesalePrice": 12500,
+    "image": "img/Thermo Fuel Max - Star Nutrition.jpg",
+    "description": "Termogénico potente para máxima definición.",
+    "isGym": true,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Vitamina C - One Fit",
+    "brand": "One Fit",
+    "category": "Vitaminas",
+    "price": 5500,
+    "wholesalePrice": 4000,
+    "image": "img/Vitamina C - One Fit.jpg",
+    "description": "Vitamina C 1000mg para fortalecer el sistema inmune.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Naranja"
+    ]
+  },
+  {
+    "name": "Vitamina C Star Nutrition",
+    "brand": "Star Nutrition",
+    "category": "Vitaminas",
+    "price": 6500,
+    "wholesalePrice": 5000,
+    "image": "img/Vitamina C Star Nutrition.jpg",
+    "description": "Vitamina C con rosa mosqueta de alta absorción.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Vitamina D3 + K2 One Fit 60 cap",
+    "brand": "One Fit",
+    "category": "Vitaminas",
+    "price": 8500,
+    "oldPrice": 10000,
+    "wholesalePrice": 6500,
+    "image": "img/Vitamina D3 + K2 One Fit 60 cap.jpg",
+    "description": "Combo ideal para la salud ósea e inmunológica.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Único"
+    ]
+  },
+  {
+    "name": "Pancakes Proteicos Granger 400gr",
+    "brand": "Granger",
+    "category": "Snacks",
+    "price": 7000,
+    "wholesalePrice": 5500,
+    "image": "img/ancakes Proteicos Granger 400gr.jpg",
+    "description": "Deliciosos panqueques proteicos fáciles de preparar.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Vainilla"
+    ]
+  },
+  {
+    "name": "Cupcakes Proteicos Granger",
+    "brand": "Granger",
+    "category": "Snacks",
+    "price": 6000,
+    "wholesalePrice": 4500,
+    "image": "img/cupcakes proteicos granger.jpg",
+    "description": "Preparado para muffins/cupcakes altos en proteína.",
+    "isGym": false,
+    "isOffer": false,
+    "isOutOfStock": false,
+    "flavors": [
+      "Chocolate"
+    ]
+  },
+  {
+    "name": "UltraTech Pudding Proteico 400g",
+    "brand": "UltraTech",
+    "category": "Snacks",
+    "price": 8000,
+    "oldPrice": 9500,
+    "wholesalePrice": 6000,
+    "image": "img/ltraTech Pudding Proteico 400g.jpg",
+    "description": "Postre proteico bajo en grasas, exquisito sabor.",
+    "isGym": false,
+    "isOffer": true,
+    "isOutOfStock": false,
+    "flavors": [
+      "Vainilla",
+      "Chocolate"
+    ]
+  }
+]
