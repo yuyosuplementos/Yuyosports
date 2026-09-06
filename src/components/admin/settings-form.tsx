@@ -11,17 +11,6 @@ import { settingsSchemas, type SettingsKey } from "@/lib/schemas/settings";
 import { DEFAULT_SETTINGS } from "@/lib/constants";
 import { cn } from "@/lib/utils/cn";
 
-export const SECTIONS: Array<{ key: SettingsKey; label: string; hint: string }> = [
-  { key: "general", label: "Hero", hint: "El bloque principal de la home." },
-  { key: "promos", label: "Barra de promos", hint: "El carrusel de arriba de todo." },
-  { key: "values", label: "Beneficios", hint: "La franja de 4 ítems." },
-  { key: "banners", label: "Banners", hint: "Las dos tarjetas minorista / mayorista." },
-  { key: "offers", label: "Ofertas", hint: "El banner grande de ofertas." },
-  { key: "wholesale", label: "Mayorista", hint: "El bloque B2B y sus beneficios." },
-  { key: "footer", label: "Pie de página", hint: "Descripción y datos de contacto." },
-  { key: "commerce", label: "Comercio", hint: "WhatsApp, envío gratis y mínimo mayorista." },
-];
-
 type AnyRecord = Record<string, unknown>;
 
 export function SettingsForm({

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getAdminSettings } from "@/lib/data/admin";
-import { SettingsForm, SECTIONS } from "@/components/admin/settings-form";
+import { SettingsForm } from "@/components/admin/settings-form";
+import { SECTIONS } from "@/lib/settings-sections";
 import { SETTINGS_KEYS, type SettingsKey } from "@/lib/schemas/settings";
 
 export default async function ContenidoSectionPage({

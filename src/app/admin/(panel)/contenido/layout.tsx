@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SECTIONS } from "@/components/admin/settings-form";
+import { SECTIONS } from "@/lib/settings-sections";
 
 export default function ContenidoLayout({ children }: { children: React.ReactNode }) {
   return (
