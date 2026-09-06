@@ -19,6 +19,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  // Sin esto, las imágenes de Open Graph con ruta relativa se resuelven mal y
+  // las previews al compartir el link (WhatsApp, Instagram) salen sin imagen.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: { default: `${SITE.name} | ${SITE.tagline}`, template: `%s | ${SITE.name}` },
   description: SITE.description,
   openGraph: {
