@@ -210,16 +210,6 @@ function renderSection(key: SettingsKey, v: AnyRecord, patch: (k: string, v: unk
             onChange={(x) => patch("wholesaleMinimum", x)}
             hint="Bloquea el checkout si el subtotal mayorista no llega."
           />
-          <StringList
-            label="Métodos de pago"
-            items={(v.paymentMethods as string[]) ?? []}
-            onChange={(x) => patch("paymentMethods", x)}
-          />
-          <StringList
-            label="Métodos de envío"
-            items={(v.shippingMethods as string[]) ?? []}
-            onChange={(x) => patch("shippingMethods", x)}
-          />
         </>
       );
   }

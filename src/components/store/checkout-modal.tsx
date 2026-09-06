@@ -34,18 +34,11 @@ export function CheckoutModal({
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<CheckoutInput>({
-    resolver: zodResolver(checkoutSchema),
-    defaultValues: {
-      paymentMethod: commerce.paymentMethods[0] ?? "",
-      shippingMethod: commerce.shippingMethods[0] ?? "",
-    },
-  });
+  } = useForm<CheckoutInput>({ resolver: zodResolver(checkoutSchema) });
 
   function onSubmit(data: CheckoutInput) {
     const message = buildOrderMessage(data, lines);
-    // Mismo comportamiento que el sitio viejo: abre WhatsApp con el pedido.
-    // No se persiste la orden (decisión 2).
+    // No se persiste la orden (decisión 2): el pedido se cierra en WhatsApp.
     window.open(waLink(commerce.whatsappPhone, message), "_blank", "noopener,noreferrer");
     clear();
     reset();
@@ -54,7 +47,7 @@ export function CheckoutModal({
   }
 
   return (
-    <Modal open={open} onClose={onClose} labelledBy="checkout-title" className="max-w-xl">
+    <Modal open={open} onClose={onClose} labelledBy="checkout-title" className="max-w-md">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 p-6 md:p-8">
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -62,7 +55,7 @@ export function CheckoutModal({
               Finalizar compra
             </h2>
             <p className="mt-1 text-xs text-brand-charcoal/50">
-              Completá tus datos y cerramos el pedido por WhatsApp.
+              Dejanos tu nombre y seguimos por WhatsApp.
             </p>
           </div>
           <button
@@ -75,74 +68,58 @@ export function CheckoutModal({
           </button>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Nombre" error={errors.name?.message}>
-            <input {...register("name")} placeholder="Juan" className={inputCls(!!errors.name)} />
-          </Field>
-          <Field label="Apellido" error={errors.lastName?.message}>
-            <input
-              {...register("lastName")}
-              placeholder="Pérez"
-              className={inputCls(!!errors.lastName)}
-            />
-          </Field>
-          <Field label="WhatsApp" error={errors.phone?.message}>
-            <input
-              {...register("phone")}
-              type="tel"
-              placeholder="11 3456 7890"
-              className={inputCls(!!errors.phone)}
-            />
-          </Field>
-          <Field label="Email" error={errors.email?.message}>
-            <input
-              {...register("email")}
-              type="email"
-              placeholder="tu@email.com"
-              className={inputCls(!!errors.email)}
-            />
-          </Field>
-          <div className="sm:col-span-2">
-            <Field label="Dirección de entrega" error={errors.address?.message}>
-              <input
-                {...register("address")}
-                placeholder="Calle y número / Piso"
-                className={inputCls(!!errors.address)}
-              />
-            </Field>
-          </div>
-          <Field label="Ciudad" error={errors.city?.message}>
-            <input {...register("city")} placeholder="CABA" className={inputCls(!!errors.city)} />
-          </Field>
-          <Field label="Método de pago">
-            <select {...register("paymentMethod")} className={inputCls(false)}>
-              {commerce.paymentMethods.map((m) => (
-                <option key={m} value={m}>
-                  {m}
-                </option>
-              ))}
-            </select>
-          </Field>
-          <div className="sm:col-span-2">
-            <Field label="Método de envío">
-              <select {...register("shippingMethod")} className={inputCls(false)}>
-                {commerce.shippingMethods.map((m) => (
-                  <option key={m} value={m}>
-                    {m}
-                  </option>
-                ))}
-              </select>
-            </Field>
-          </div>
-        </div>
-
-        <div className="flex items-baseline justify-between rounded-2xl bg-brand-stone px-5 py-4">
+        <label className="flex flex-col gap-1.5">
           <span className="text-[10px] font-black tracking-widest text-brand-charcoal/50 uppercase">
-            Total del pedido
+            Tu nombre
           </span>
-          <span className="font-display text-2xl font-black text-brand-charcoal">
-            {formatARS(subtotal)}
+          <input
+            {...register("name")}
+            placeholder="Juan Pérez"
+            autoFocus
+            className={cn(
+              "w-full rounded-xl border-none px-4 py-3 text-sm font-medium text-brand-charcoal outline-none transition-shadow",
+              errors.name
+                ? "bg-red-50 ring-2 ring-red-400"
+                : "bg-brand-stone focus:ring-2 focus:ring-brand-live",
+            )}
+          />
+          {errors.name && (
+            <span className="text-[11px] font-bold text-red-600">{errors.name.message}</span>
+          )}
+        </label>
+
+        {/* Resumen del pedido: lo mismo que va a viajar al mensaje. */}
+        <div className="flex flex-col gap-3 rounded-2xl bg-brand-stone px-5 py-4">
+          <span className="text-[10px] font-black tracking-widest text-brand-charcoal/50 uppercase">
+            Tu pedido
           </span>
+          <ul className="flex max-h-56 flex-col gap-2 overflow-y-auto">
+            {lines.map((l) => (
+              <li key={l.lineId} className="flex items-start justify-between gap-3 text-xs">
+                <span className="min-w-0 text-brand-charcoal">
+                  <span className="font-bold">{l.name}</span>
+                  {l.flavor && <span className="text-brand-charcoal/50"> · {l.flavor}</span>}
+                  {l.isWholesale && (
+                    <span className="ml-1 rounded-full bg-brand-charcoal px-1.5 py-0.5 text-[9px] font-black tracking-wider text-brand-live uppercase">
+                      May.
+                    </span>
+                  )}
+                  <span className="text-brand-charcoal/50"> ×{l.qty}</span>
+                </span>
+                <span className="shrink-0 font-bold text-brand-charcoal">
+                  {formatARS(l.unitPrice * l.qty)}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-baseline justify-between border-t border-brand-charcoal/10 pt-3">
+            <span className="text-[10px] font-black tracking-widest text-brand-charcoal/50 uppercase">
+              Total
+            </span>
+            <span className="font-display text-2xl font-black text-brand-charcoal">
+              {formatARS(subtotal)}
+            </span>
+          </div>
         </div>
 
         <button
@@ -155,32 +132,5 @@ export function CheckoutModal({
         </button>
       </form>
     </Modal>
-  );
-}
-
-function inputCls(hasError: boolean) {
-  return cn(
-    "w-full rounded-xl border-none px-4 py-3 text-sm font-medium text-brand-charcoal outline-none transition-shadow",
-    hasError ? "bg-red-50 ring-2 ring-red-400" : "bg-brand-stone focus:ring-2 focus:ring-brand-live",
-  );
-}
-
-function Field({
-  label,
-  error,
-  children,
-}: {
-  label: string;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-[10px] font-black tracking-widest text-brand-charcoal/50 uppercase">
-        {label}
-      </span>
-      {children}
-      {error && <span className="text-[11px] font-bold text-red-600">{error}</span>}
-    </label>
   );
 }

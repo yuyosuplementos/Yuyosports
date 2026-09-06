@@ -2,23 +2,18 @@ import type { CartLine, CheckoutData } from "@/types/domain";
 import { formatARS } from "./format";
 
 /**
- * Arma el mensaje del pedido.
+ * Arma el mensaje del pedido: nombre, detalle del carrito y total.
  *
- * PARIDAD EXACTA con index.html:2213-2240 — mismos asteriscos, mismos guiones
- * y mismos saltos de linea. El dueño lee estos mensajes todos los días; que
- * cambien de forma sin motivo es una regresion.
+ * Mantiene el formato visual del sitio viejo (asteriscos y separadores) pero
+ * ya no incluye teléfono, email, dirección, forma de pago ni envío: eso se
+ * acuerda en la conversación de WhatsApp que este mismo mensaje abre.
  */
 const SEP = "------------------------------------";
 
 export function buildOrderMessage(data: CheckoutData, lines: CartLine[]): string {
   let msg = `*NUEVO PEDIDO - YUYO SPORTS*\n`;
   msg += `${SEP}\n`;
-  msg += `*Cliente:* ${data.name} ${data.lastName}\n`;
-  msg += `*WhatsApp:* ${data.phone}\n`;
-  msg += `*Email:* ${data.email}\n`;
-  msg += `*Dirección:* ${data.address}, ${data.city}\n`;
-  msg += `*Envío:* ${data.shippingMethod}\n`;
-  msg += `*Pago:* ${data.paymentMethod}\n`;
+  msg += `*Cliente:* ${data.name}\n`;
   msg += `${SEP}\n`;
   msg += `*PRODUCTOS:*\n`;
 
@@ -37,6 +32,12 @@ export function buildOrderMessage(data: CheckoutData, lines: CartLine[]): string
   const total = lines.reduce((a, l) => a + l.unitPrice * l.qty, 0);
   msg += `${SEP}\n`;
   msg += `*TOTAL DEL PEDIDO:* ${formatARS(total)}\n`;
+
+  // Los precios mayoristas difieren de los de lista: sin esta marca el
+  // vendedor no puede saber por que el total no coincide con el catalogo.
+  if (lines.some((l) => l.isWholesale)) {
+    msg += `*(precios mayoristas)*\n`;
+  }
   return msg;
 }
 

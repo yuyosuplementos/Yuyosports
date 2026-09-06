@@ -47,12 +47,10 @@ export async function updateSession(request: NextRequest) {
     url.searchParams.set("next", pathname);
     return NextResponse.redirect(url);
   }
-  if (user && isLogin) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/admin";
-    url.search = "";
-    return NextResponse.redirect(url);
-  }
-
+  // NO redirigimos al usuario autenticado fuera de /admin/login.
+  // Seria un segundo loop: un usuario logueado que NO esta en `admins` es
+  // rechazado por requireAdmin() hacia /admin/login?error=forbidden, y desde
+  // ahi volveria a /admin, y asi indefinidamente. Que /admin/login siempre
+  // renderice es ademas la unica forma de mostrarle por que fue rechazado.
   return response;
 }

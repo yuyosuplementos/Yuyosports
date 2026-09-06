@@ -1,7 +1,10 @@
 import { SetupNotice } from "@/components/admin/setup-notice";
 import { hasSupabaseConfig } from "@/lib/supabase/public";
 
-// Layout desnudo: NO llama requireAdmin, si no el login redirigiría a sí mismo.
+/**
+ * El login vive FUERA del route group `(panel)`, así que este layout no
+ * compone con el layout protegido y nunca llama requireAdmin().
+ */
 export const dynamic = "force-dynamic";
 
 export default function LoginLayout({ children }: { children: React.ReactNode }) {

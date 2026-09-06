@@ -6,5 +6,5 @@ insert into public.settings (key, value) values
   ('offers', '{"label":"Ofertas","title":"Aprovechá los descuentos de la semana","description":"Productos seleccionados con precios rebajados por tiempo limitado."}'::jsonb),
   ('wholesale', '{"title":"Venta mayorista","description":"Trabajamos con gimnasios, dietéticas y revendedores de todo el país con precios diferenciales.","benefits":["Precios por volumen","Atención personalizada por WhatsApp","Envíos a todo el país","Reposición garantizada"]}'::jsonb),
   ('footer', '{"description":"Suplementación deportiva premium. Productos originales con garantía y envíos a todo el país.","phone":"+54 9 2262 53-5954","email":"ventas@yuyosports.com"}'::jsonb),
-  ('commerce', '{"whatsappPhone":"5492262535954","freeShippingThreshold":85000,"wholesaleMinimum":300000,"paymentMethods":["Transferencia bancaria","Rapipago","Pago fácil"],"shippingMethods":["Lo acuerdo con el vendedor","Envío a domicilio"]}'::jsonb)
+  ('commerce', '{"whatsappPhone":"5492262535954","freeShippingThreshold":85000,"wholesaleMinimum":300000}'::jsonb)
 on conflict (key) do update set value = excluded.value, updated_at = now();

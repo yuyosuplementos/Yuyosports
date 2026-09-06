@@ -99,6 +99,7 @@ de Supabase más `NEXT_PUBLIC_SITE_URL` con el dominio final (la usan `sitemap.x
 | Zustand + `persist` con `skipHydration` | Evita el hydration mismatch del badge del carrito (server 0 vs cliente N). |
 | `formatARS` propia, no `Intl.NumberFormat` | El ICU de Node y el del navegador difieren en el separador → mismatch en cada precio. |
 | Subida de imágenes con signed URL | El body de una función serverless en Vercel topea en 4,5 MB y las fotos originales llegan a 4,3 MB. |
+| `/admin/login` fuera del route group `(panel)` | En App Router los layouts anidados **se componen**, no se reemplazan: con el layout protegido en `app/admin/` envolvía también al login, llamaba `requireAdmin()` y redirigía al login. Bucle infinito. |
 
 ### Caché
 
@@ -117,8 +118,8 @@ npm run typecheck
 npm run lint
 ```
 
-- **`test:whatsapp`** compara `buildOrderMessage` byte a byte contra la implementación
-  original transcripta de `index.html:2213-2240`.
+- **`test:whatsapp`** fija el formato del mensaje de pedido y verifica que no reaparezcan
+  los campos que el checkout dejó de pedir.
 - **`test:filters`** verifica 16 combinaciones de filtros contra los conteos reales del catálogo.
 
 ### Verificación manual
@@ -149,6 +150,10 @@ Decididos con el dueño antes de empezar:
 3. **Se quitó el descuento por transferencia del copy.** Se anunciaba y nunca se aplicaba.
 4. **El mínimo mayorista bloquea el checkout**, con el faltante explícito. Antes era decorativo.
 5. **Los precios mayoristas siguen siendo públicos**, sin código de acceso.
+6. **El checkout pide solo el nombre.** Teléfono, email, dirección, forma de pago y envío se
+   acuerdan en la conversación de WhatsApp que el propio checkout abre; pedirlos dos veces
+   agregaba fricción y datos personales que no necesitamos guardar. Como consecuencia,
+   `paymentMethods` y `shippingMethods` salieron de `settings.commerce`: ya no los usa nadie.
 
 ### Bugs del sitio viejo corregidos
 

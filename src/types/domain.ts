@@ -43,11 +43,4 @@ export interface CartLine {
 
 export interface CheckoutData {
   name: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  address: string;
-  city: string;
-  paymentMethod: string;
-  shippingMethod: string;
 }

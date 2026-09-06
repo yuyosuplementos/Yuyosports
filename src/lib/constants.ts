@@ -74,8 +74,6 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     whatsappPhone: "5492262535954",
     freeShippingThreshold: 85000,
     wholesaleMinimum: 300000,
-    paymentMethods: ["Transferencia bancaria", "Rapipago", "Pago fácil"],
-    shippingMethods: ["Lo acuerdo con el vendedor", "Envío a domicilio"],
   },
 };
 

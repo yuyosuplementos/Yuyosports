@@ -74,8 +74,6 @@ export const commerceSchema = z.object({
   freeShippingThreshold: z.number().int().min(0),
   /** Ahora bloquea el checkout de verdad; antes era texto decorativo. */
   wholesaleMinimum: z.number().int().min(0),
-  paymentMethods: z.array(trimmed.min(1).max(40)).min(1).max(8),
-  shippingMethods: z.array(trimmed.min(1).max(40)).min(1).max(8),
 });
 
 export const settingsSchemas = {
