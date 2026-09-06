@@ -101,7 +101,6 @@ export type Database = {
           id: string
           image_alt: string | null
           image_path: string | null
-          is_gym: boolean
           is_offer: boolean
           is_out_of_stock: boolean
           is_published: boolean
@@ -122,7 +121,6 @@ export type Database = {
           id?: string
           image_alt?: string | null
           image_path?: string | null
-          is_gym?: boolean
           is_offer?: boolean
           is_out_of_stock?: boolean
           is_published?: boolean
@@ -143,7 +141,6 @@ export type Database = {
           id?: string
           image_alt?: string | null
           image_path?: string | null
-          is_gym?: boolean
           is_offer?: boolean
           is_out_of_stock?: boolean
           is_published?: boolean
@@ -194,7 +191,6 @@ export type Database = {
     Views: {
       admin_product_stats: {
         Row: {
-          gym_line: number | null
           on_offer: number | null
           out_of_stock: number | null
           total: number | null

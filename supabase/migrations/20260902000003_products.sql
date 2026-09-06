@@ -30,7 +30,6 @@ create table public.products (
   image_path      text check (image_path is null or image_path ~ '^[a-z0-9/_.-]+$'),
   image_alt       text,
 
-  is_gym          boolean not null default false,
   is_offer        boolean not null default false,
   is_out_of_stock boolean not null default false,
   is_published    boolean not null default true,

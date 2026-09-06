@@ -13,12 +13,11 @@ create policy "media_admin_update" on storage.objects
 create policy "media_admin_delete" on storage.objects
   for delete to authenticated using (bucket_id = 'media' and (select private.is_admin()));
 
--- Las 4 metricas del dashboard en una query en vez de cuatro.
+-- Las 3 metricas del dashboard en una query en vez de tres.
 -- security_invoker: respeta la RLS del que consulta, no la del creador.
 create view public.admin_product_stats
 with (security_invoker = on) as
 select count(*)::int                                as total,
        count(*) filter (where is_out_of_stock)::int as out_of_stock,
-       count(*) filter (where is_offer)::int        as on_offer,
-       count(*) filter (where is_gym)::int          as gym_line
+       count(*) filter (where is_offer)::int        as on_offer
 from public.products;

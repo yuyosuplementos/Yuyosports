@@ -4,7 +4,7 @@ import type { Product } from "@/types/domain";
 
 const SELECT = `
   id, slug, name, description, price, old_price, wholesale_price, flavors,
-  image_path, image_alt, is_gym, is_offer, is_out_of_stock, sort_order,
+  image_path, image_alt, is_offer, is_out_of_stock, sort_order,
   category:categories!inner(id, slug, name),
   brand:brands!inner(id, slug, name)
 `;
@@ -20,7 +20,6 @@ type Row = {
   flavors: string[] | null;
   image_path: string | null;
   image_alt: string | null;
-  is_gym: boolean;
   is_offer: boolean;
   is_out_of_stock: boolean;
   sort_order: number;
@@ -44,7 +43,6 @@ function toProduct(r: Row): Product {
     flavors: r.flavors ?? [],
     imagePath: r.image_path,
     imageAlt: r.image_alt,
-    isGym: r.is_gym,
     isOffer: r.is_offer,
     isOutOfStock: r.is_out_of_stock,
     sortOrder: r.sort_order,

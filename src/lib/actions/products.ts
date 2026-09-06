@@ -26,7 +26,6 @@ export async function saveProductAction(input: unknown): Promise<ActionResult> {
     flavors: p.flavors,
     image_path: p.imagePath,
     image_alt: p.imageAlt ?? p.name,
-    is_gym: p.isGym,
     is_offer: p.isOffer,
     is_out_of_stock: p.isOutOfStock,
     is_published: p.isPublished,

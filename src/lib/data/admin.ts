@@ -9,7 +9,7 @@ import type { Product, Taxon } from "@/types/domain";
 
 const SELECT = `
   id, slug, name, description, price, old_price, wholesale_price, flavors,
-  image_path, image_alt, is_gym, is_offer, is_out_of_stock, is_published, sort_order,
+  image_path, image_alt, is_offer, is_out_of_stock, is_published, sort_order,
   category:categories!inner(id, slug, name),
   brand:brands!inner(id, slug, name)
 `;
@@ -44,7 +44,6 @@ export async function getAdminProducts(): Promise<AdminProduct[]> {
     flavors: (r.flavors as string[] | null) ?? [],
     imagePath: (r.image_path as string | null) ?? null,
     imageAlt: (r.image_alt as string | null) ?? null,
-    isGym: r.is_gym as boolean,
     isOffer: r.is_offer as boolean,
     isOutOfStock: r.is_out_of_stock as boolean,
     isPublished: r.is_published as boolean,
@@ -84,7 +83,7 @@ export async function getAdminTaxonomy(): Promise<{
 export async function getAdminStats() {
   const sb = await createServerSupabase();
   const { data } = await sb.from("admin_product_stats").select("*").single();
-  return data ?? { total: 0, out_of_stock: 0, on_offer: 0, gym_line: 0 };
+  return data ?? { total: 0, out_of_stock: 0, on_offer: 0 };
 }
 
 export async function getAdminSettings(): Promise<Record<string, unknown>> {

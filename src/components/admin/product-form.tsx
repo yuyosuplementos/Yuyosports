@@ -54,7 +54,6 @@ export function ProductForm({
           flavors: product.flavors,
           imagePath: product.imagePath,
           imageAlt: product.imageAlt,
-          isGym: product.isGym,
           isOffer: product.isOffer,
           isOutOfStock: product.isOutOfStock,
           isPublished: product.isPublished,
@@ -67,7 +66,6 @@ export function ProductForm({
           flavors: [],
           imagePath: null,
           imageAlt: null,
-          isGym: false,
           isOffer: false,
           isOutOfStock: false,
           isPublished: true,
@@ -246,7 +244,6 @@ export function ProductForm({
               ["isPublished", "Publicado (visible en la tienda)"],
               ["isOutOfStock", "Sin stock"],
               ["isOffer", "Destacar como oferta"],
-              ["isGym", "Pertenece a la línea GYM"],
             ] as const
           ).map(([name, label]) => (
             <label key={name} className="flex items-center gap-3 text-sm font-medium">

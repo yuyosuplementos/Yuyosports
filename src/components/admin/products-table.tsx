@@ -143,11 +143,6 @@ export function ProductsTable({ products }: { products: AdminProduct[] }) {
                           Oferta
                         </span>
                       )}
-                      {p.isGym && (
-                        <span className="rounded-full bg-brand-live/25 px-2 py-0.5 text-[10px] font-black text-brand-moss uppercase">
-                          Gym
-                        </span>
-                      )}
                       <button
                         type="button"
                         role="switch"

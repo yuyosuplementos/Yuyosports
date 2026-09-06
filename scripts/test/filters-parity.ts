@@ -19,7 +19,7 @@ const products: Product[] = SEED_PRODUCTS.map((p, i) => {
     brand: { id: brandId.get(p.brandName)!, slug: slugify(p.brandName), name: p.brandName },
     price: p.price, oldPrice: p.oldPrice, wholesalePrice: p.wholesalePrice,
     flavors: p.flavors, imagePath: null, imageAlt: null,
-    isGym: p.isGym, isOffer: p.isOffer, isOutOfStock: p.isOutOfStock, sortOrder: p.sortOrder,
+    isOffer: p.isOffer, isOutOfStock: p.isOutOfStock, sortOrder: p.sortOrder,
   };
 });
 
@@ -34,15 +34,13 @@ const cases: Array<[string, number, number]> = [
   ["marca Star Nutrition",                n({ brand: "star-nutrition" }),                     11],
   ["marca Granger",                       n({ brand: "granger" }),                             8],
   ["marca One Fit",                       n({ brand: "one-fit" }),                             7],
-  ["solo gym",                            n({ isGym: true }),                                 12],
   ["solo ofertas",                        n({ saleOnly: true }),                              12],
   ["Creatinas + Star Nutrition",          n({ category: "creatinas", brand: "star-nutrition" }), 2],
-  ["Creatinas + gym",                     n({ category: "creatinas", isGym: true }),           7],
   ["buscar 'magnesio'",                   n({ search: "magnesio" }),                           4],
   ["buscar 'prote'",                      n({ search: "prote" }),                             10],
   ["buscar 'PROTE' (case-insensitive)",   n({ search: "PROTE" }),                             10],
   ["ofertas + Star Nutrition",            n({ saleOnly: true, brand: "star-nutrition" }),      4],
-  ["combinación sin resultados",          n({ category: "snacks", isGym: true }),              0],
+  ["combinación sin resultados",          n({ category: "snacks", brand: "one-fit" }),         0],
 ];
 
 let failed = 0;

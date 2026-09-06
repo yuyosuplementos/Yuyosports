@@ -150,7 +150,11 @@ Decididos con el dueño antes de empezar:
 3. **Se quitó el descuento por transferencia del copy.** Se anunciaba y nunca se aplicaba.
 4. **El mínimo mayorista bloquea el checkout**, con el faltante explícito. Antes era decorativo.
 5. **Los precios mayoristas siguen siendo públicos**, sin código de acceso.
-6. **El checkout pide solo el nombre.** Teléfono, email, dirección, forma de pago y envío se
+6. **Se eliminó la "línea GYM".** Era un flag booleano por producto (no una categoría)
+   heredado del sitio original, con su propio botón de filtro. No representaba nada, así
+   que se borró la columna `is_gym`, el filtro y la métrica del dashboard. Los 12 productos
+   que lo tenían activo quedan registrados en el historial de git por si el dato sirve.
+7. **El checkout pide solo el nombre.** Teléfono, email, dirección, forma de pago y envío se
    acuerdan en la conversación de WhatsApp que el propio checkout abre; pedirlos dos veces
    agregaba fricción y datos personales que no necesitamos guardar. Como consecuencia,
    `paymentMethods` y `shippingMethods` salieron de `settings.commerce`: ya no los usa nadie.

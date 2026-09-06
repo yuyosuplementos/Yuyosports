@@ -1,13 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  faSearch,
-  faXmark,
-  faDumbbell,
-  faBolt,
-  faFilterCircleXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faXmark, faBolt, faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { Icon } from "@/components/ui/icon";
 import { ProductCard } from "./product-card";
 import { QuickView } from "./quick-view";
@@ -129,19 +123,6 @@ export function CatalogClient({
         <div className="flex gap-2">
           <button
             type="button"
-            aria-pressed={filters.isGym}
-            onClick={() => toggle("isGym")}
-            className={cn(
-              "btn-premium flex items-center gap-2 rounded-xl px-4 py-3 text-[11px] font-black tracking-widest uppercase transition-all",
-              filters.isGym
-                ? "bg-brand-live text-brand-charcoal"
-                : "bg-white text-brand-charcoal shadow-card hover:bg-brand-stone",
-            )}
-          >
-            <Icon icon={faDumbbell} className="h-3 w-3" /> Gym
-          </button>
-          <button
-            type="button"
             aria-pressed={filters.saleOnly}
             onClick={() => toggle("saleOnly")}
             className={cn(
@@ -161,7 +142,6 @@ export function CatalogClient({
           <span className="text-[10px] font-black tracking-widest text-brand-live uppercase">
             Filtros activos:
           </span>
-          {filters.isGym && <Chip label="Gym" onClear={() => toggle("isGym")} />}
           {filters.saleOnly && <Chip label="Solo ofertas" onClear={() => toggle("saleOnly")} />}
           {filters.category !== "all" && (
             <Chip

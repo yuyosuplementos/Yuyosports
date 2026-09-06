@@ -30,7 +30,6 @@ const out = raw.map((p, i) => {
     wholesalePrice: p.wholesalePrice,
     flavors,
     sourceImage: p.image,
-    isGym: !!p.isGym,
     isOffer: !!p.isOffer,
     isOutOfStock: !!p.isOutOfStock,
     sortOrder: (i + 1) * 10,
@@ -46,6 +45,8 @@ const file = `/**
  *    vuelva a haber dos grafias de la misma categoria.
  *  - flavors: se elimina el centinela 'Unico'; sin variantes = array vacio.
  *  - oldPrice ausente -> null explicito.
+ *  - se descarta isGym: la "linea GYM" del sitio original no representaba
+ *    nada y el dueno la dio de baja.
  *  - slug derivado del nombre (sin acentos), tambien usado como nombre del
  *    objeto en Storage: resuelve espacios, acentos y los dos archivos con el
  *    nombre truncado ('ancakes...', 'ltraTech...').
@@ -65,7 +66,6 @@ export interface SeedProduct {
   flavors: string[];
   /** Ruta relativa al proyecto viejo; la consume migrate-images.ts */
   sourceImage: string;
-  isGym: boolean;
   isOffer: boolean;
   isOutOfStock: boolean;
   sortOrder: number;

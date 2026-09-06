@@ -20,7 +20,6 @@ export const productSchema = z
     flavors: z.array(z.string().trim().min(1).max(40)).max(12).default([]),
     imagePath: z.string().trim().max(300).nullable().default(null),
     imageAlt: z.string().trim().max(160).nullable().default(null),
-    isGym: z.boolean().default(false),
     isOffer: z.boolean().default(false),
     isOutOfStock: z.boolean().default(false),
     isPublished: z.boolean().default(true),

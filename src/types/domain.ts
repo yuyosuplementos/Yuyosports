@@ -19,7 +19,6 @@ export interface Product {
   flavors: string[];
   imagePath: string | null;
   imageAlt: string | null;
-  isGym: boolean;
   isOffer: boolean;
   isOutOfStock: boolean;
   sortOrder: number;

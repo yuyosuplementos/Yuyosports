@@ -6,7 +6,6 @@ import type { Product } from "@/types/domain";
 export interface Filters {
   category: string; // slug | "all"
   brand: string; // slug | "all"
-  isGym: boolean;
   saleOnly: boolean;
   search: string;
 }
@@ -14,14 +13,13 @@ export interface Filters {
 export const EMPTY_FILTERS: Filters = {
   category: "all",
   brand: "all",
-  isGym: false,
   saleOnly: false,
   search: "",
 };
 
 type Action =
   | { type: "set"; key: keyof Filters; value: string | boolean }
-  | { type: "toggle"; key: "isGym" | "saleOnly" }
+  | { type: "toggle"; key: "saleOnly" }
   | { type: "reset" }
   | { type: "hydrate"; value: Filters };
 
@@ -38,13 +36,12 @@ function reducer(state: Filters, action: Action): Filters {
   }
 }
 
-const PARAM = { category: "categoria", brand: "marca", isGym: "gym", saleOnly: "ofertas", search: "q" } as const;
+const PARAM = { category: "categoria", brand: "marca", saleOnly: "ofertas", search: "q" } as const;
 
 function toSearchParams(f: Filters): string {
   const p = new URLSearchParams();
   if (f.category !== "all") p.set(PARAM.category, f.category);
   if (f.brand !== "all") p.set(PARAM.brand, f.brand);
-  if (f.isGym) p.set(PARAM.isGym, "1");
   if (f.saleOnly) p.set(PARAM.saleOnly, "1");
   if (f.search.trim()) p.set(PARAM.search, f.search.trim());
   return p.toString();
@@ -55,7 +52,6 @@ function fromSearchParams(qs: string, initial: Filters): Filters {
   return {
     category: p.get(PARAM.category) ?? initial.category,
     brand: p.get(PARAM.brand) ?? initial.brand,
-    isGym: p.get(PARAM.isGym) === "1" || initial.isGym,
     saleOnly: p.get(PARAM.saleOnly) === "1" || initial.saleOnly,
     search: p.get(PARAM.search) ?? initial.search,
   };
@@ -90,7 +86,7 @@ export function useFilters(initial: Filters = EMPTY_FILTERS, syncUrl = true) {
     (key: keyof Filters, value: string | boolean) => dispatch({ type: "set", key, value }),
     [],
   );
-  const toggle = useCallback((key: "isGym" | "saleOnly") => dispatch({ type: "toggle", key }), []);
+  const toggle = useCallback((key: "saleOnly") => dispatch({ type: "toggle", key }), []);
   const reset = useCallback(() => dispatch({ type: "reset" }), []);
 
   return { filters, set, toggle, reset };
@@ -103,7 +99,6 @@ export function useFilters(initial: Filters = EMPTY_FILTERS, syncUrl = true) {
 export function applyFilters(products: Product[], f: Filters): Product[] {
   const q = f.search.trim().toLowerCase();
   return products.filter((p) => {
-    if (f.isGym && !p.isGym) return false;
     if (f.category !== "all" && p.category.slug !== f.category) return false;
     if (f.brand !== "all" && p.brand.slug !== f.brand) return false;
     if (f.saleOnly && !p.isOffer) return false;
@@ -119,7 +114,6 @@ export function countActive(f: Filters): number {
   return (
     (f.category !== "all" ? 1 : 0) +
     (f.brand !== "all" ? 1 : 0) +
-    (f.isGym ? 1 : 0) +
     (f.saleOnly ? 1 : 0) +
     (f.search.trim() ? 1 : 0)
   );

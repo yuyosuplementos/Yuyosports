@@ -16,14 +16,13 @@ export default async function AdminDashboard() {
     { label: "Total productos", value: stats.total },
     { label: "Sin stock", value: stats.out_of_stock },
     { label: "En oferta", value: stats.on_offer },
-    { label: "Línea GYM", value: stats.gym_line },
   ];
 
   return (
     <div className="flex flex-col gap-8">
       <h1 className="font-display text-2xl font-black text-brand-charcoal">Dashboard</h1>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-3">
         {cards.map((c) => (
           <div key={c.label} className="rounded-3xl bg-white p-6 shadow-card">
             <p className="text-[10px] font-black tracking-widest text-brand-charcoal/45 uppercase">
