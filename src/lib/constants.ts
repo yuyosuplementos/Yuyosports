@@ -23,7 +23,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   },
   promos: {
     lines: [
-      { title: "ENVÍO GRATIS", detail: "En compras superiores a $85.000" },
+      { title: "ENVÍO GRATIS", detail: "En compras superiores a $150.000" },
       { title: "OFERTAS ESPECIALES", detail: "Hasta 30% OFF en productos seleccionados" },
       { title: "VENTA MAYORISTA", detail: "Precios especiales para revendedores" },
     ],
@@ -72,7 +72,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   },
   commerce: {
     whatsappPhone: "5492262535954",
-    freeShippingThreshold: 85000,
+    freeShippingThreshold: 150000,
     wholesaleMinimum: 300000,
   },
 };

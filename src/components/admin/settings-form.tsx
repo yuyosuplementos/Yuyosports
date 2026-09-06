@@ -192,6 +192,7 @@ function renderSection(key: SettingsKey, v: AnyRecord, patch: (k: string, v: unk
             label="Envío gratis a partir de"
             value={num(v.freeShippingThreshold)}
             onChange={(x) => patch("freeShippingThreshold", x)}
+            hint="Ojo: el texto de la barra de promos es aparte. Si cambiás este monto, actualizalo también en la sección Barra de promos."
           />
           <Num
             label="Compra mínima mayorista"
