@@ -29,10 +29,6 @@ export const productSchema = z
   .refine((d) => d.wholesalePrice <= d.price, {
     message: "El precio mayorista no puede superar al minorista",
     path: ["wholesalePrice"],
-  })
-  .refine((d) => !d.oldPrice || d.oldPrice > d.price, {
-    message: "El precio anterior debe ser mayor al actual (es el precio tachado)",
-    path: ["oldPrice"],
   });
 
 /**

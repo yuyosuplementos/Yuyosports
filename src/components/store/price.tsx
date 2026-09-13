@@ -16,7 +16,9 @@ import type { Product } from "@/types/domain";
 export function Price({ product, size = "md" }: { product: Product; size?: "md" | "lg" }) {
   const wholesale = usePrefs(selectWholesale);
   const price = wholesale ? product.wholesalePrice : product.price;
-  const showOld = !wholesale && !!product.oldPrice;
+  // El panel ya permite cargar un precio anterior menor o igual al actual.
+  // Tacharlo en ese caso parecería un aumento: solo se muestra si es mayor.
+  const showOld = !wholesale && !!product.oldPrice && product.oldPrice > product.price;
 
   return (
     <div className="flex flex-wrap items-baseline gap-2">

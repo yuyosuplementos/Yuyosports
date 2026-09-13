@@ -16,7 +16,7 @@ create table public.products (
 
   -- Precios en pesos enteros. integer aguanta hasta $2.147.483.647.
   price           integer not null check (price > 0 and price < 100000000),
-  old_price       integer          check (old_price is null or old_price > price),
+  old_price       integer          check (old_price is null or old_price > 0),
   wholesale_price integer not null check (wholesale_price > 0),
 
   -- Sabor es solo una etiqueta que viaja al mensaje de WhatsApp:
