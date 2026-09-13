@@ -1,10 +1,10 @@
 insert into public.settings (key, value) values
   ('general', '{"heroLabel":"Suplementación de alto rendimiento","heroTitle":"Supera tu propio límite","heroDesc":"Suplementos originales, precios reales y asesoramiento de verdad. Envíos a todo el país.","heroImagePath":null}'::jsonb),
-  ('promos', '{"lines":[{"title":"ENVÍO GRATIS","detail":"En compras superiores a $150.000"},{"title":"OFERTAS ESPECIALES","detail":"Hasta 30% OFF en productos seleccionados"},{"title":"VENTA MAYORISTA","detail":"Precios especiales para revendedores"}]}'::jsonb),
+  ('promos', '{"lines":[{"title":"OFERTAS ESPECIALES","detail":"Hasta 30% OFF en productos seleccionados"},{"title":"VENTA MAYORISTA","detail":"Precios especiales para revendedores"}]}'::jsonb),
   ('values', '{"items":[{"title":"Envíos a todo el país","description":"Despachamos en 24/48 hs hábiles"},{"title":"Productos originales","description":"Todas las marcas con garantía oficial"},{"title":"Múltiples medios de pago","description":"Transferencia, Rapipago y Pago Fácil"},{"title":"Asesoramiento real","description":"Te ayudamos a elegir por WhatsApp"}]}'::jsonb),
   ('banners', '{"retail":{"title":"Comprá por unidad","description":"Todo el catálogo disponible, sin mínimo de compra.","buttonLabel":"Ver catálogo"},"wholesale":{"title":"Venta mayorista","description":"Precios por volumen para gimnasios, dietéticas y revendedores.","buttonLabel":"Consultar precios"}}'::jsonb),
   ('offers', '{"label":"Ofertas","title":"Aprovechá los descuentos de la semana","description":"Productos seleccionados con precios rebajados por tiempo limitado."}'::jsonb),
   ('wholesale', '{"title":"Venta mayorista","description":"Trabajamos con gimnasios, dietéticas y revendedores de todo el país con precios diferenciales.","benefits":["Precios por volumen","Atención personalizada por WhatsApp","Envíos a todo el país","Reposición garantizada"]}'::jsonb),
   ('footer', '{"description":"Suplementación deportiva premium. Productos originales con garantía y envíos a todo el país.","phone":"+54 9 2262 53-5954","email":"ventas@yuyosports.com"}'::jsonb),
-  ('commerce', '{"whatsappPhone":"5492262535954","freeShippingThreshold":150000,"wholesaleMinimum":300000}'::jsonb)
+  ('commerce', '{"whatsappPhone":"5492262535954","wholesaleMinimum":300000}'::jsonb)
 on conflict (key) do update set value = excluded.value, updated_at = now();

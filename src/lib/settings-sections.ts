@@ -17,5 +17,5 @@ export const SECTIONS: Array<{ key: SettingsKey; label: string; hint: string }> 
   { key: "offers", label: "Ofertas", hint: "El banner grande de ofertas." },
   { key: "wholesale", label: "Mayorista", hint: "El bloque B2B y sus beneficios." },
   { key: "footer", label: "Pie de página", hint: "Descripción y datos de contacto." },
-  { key: "commerce", label: "Comercio", hint: "WhatsApp, envío gratis y mínimo mayorista." },
+  { key: "commerce", label: "Comercio", hint: "WhatsApp y mínimo mayorista." },
 ];

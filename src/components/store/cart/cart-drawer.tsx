@@ -8,7 +8,6 @@ import {
   faPlus,
   faTrash,
   faCartShopping,
-  faTruck,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { Icon } from "@/components/ui/icon";
@@ -43,11 +42,6 @@ export function CartDrawer({
   const hasWholesale = useCart(selectHasWholesale);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
-  const remainingForFreeShipping = Math.max(0, commerce.freeShippingThreshold - subtotal);
-  const shippingPct = commerce.freeShippingThreshold
-    ? Math.min(100, (subtotal / commerce.freeShippingThreshold) * 100)
-    : 100;
-
   // Decisión 6: el mínimo mayorista ahora BLOQUEA. En el sitio viejo era
   // texto decorativo y entraban pedidos que después había que rechazar.
   const wholesaleShortfall = hasWholesale
@@ -72,29 +66,6 @@ export function CartDrawer({
             <Icon icon={faXmark} className="h-4 w-4" />
           </button>
         </header>
-
-        {!empty && commerce.freeShippingThreshold > 0 && (
-          <div className="border-b border-brand-charcoal/8 bg-brand-stone/60 px-6 py-4">
-            <p className="flex items-center gap-2 text-[11px] font-bold text-brand-charcoal">
-              <Icon icon={faTruck} className="h-3 w-3 text-brand-moss" />
-              {remainingForFreeShipping > 0 ? (
-                <span>
-                  Te faltan{" "}
-                  <strong className="text-brand-moss">{formatARS(remainingForFreeShipping)}</strong>{" "}
-                  para el envío gratis
-                </span>
-              ) : (
-                <span className="text-brand-moss">¡Tenés envío gratis!</span>
-              )}
-            </p>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-brand-charcoal/10">
-              <div
-                className="h-full rounded-full bg-brand-live transition-all duration-500"
-                style={{ width: `${shippingPct}%` }}
-              />
-            </div>
-          </div>
-        )}
 
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {empty ? (

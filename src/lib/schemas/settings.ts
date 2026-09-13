@@ -71,7 +71,6 @@ export const commerceSchema = z.object({
     .string()
     .trim()
     .regex(/^\d{8,15}$/, "Solo dígitos, con código de país. Ej: 5492262535954"),
-  freeShippingThreshold: z.number().int().min(0),
   /** Ahora bloquea el checkout de verdad; antes era texto decorativo. */
   wholesaleMinimum: z.number().int().min(0),
 });

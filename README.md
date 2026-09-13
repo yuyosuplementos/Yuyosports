@@ -158,6 +158,8 @@ Decididos con el dueño antes de empezar:
    acuerdan en la conversación de WhatsApp que el propio checkout abre; pedirlos dos veces
    agregaba fricción y datos personales que no necesitamos guardar. Como consecuencia,
    `paymentMethods` y `shippingMethods` salieron de `settings.commerce`: ya no los usa nadie.
+8. **Sin envío gratis.** Se quitó la barra de progreso del carrito, el umbral
+   `freeShippingThreshold` de `settings.commerce` y la línea "ENVÍO GRATIS" de las promos.
 
 ### Bugs del sitio viejo corregidos
 
