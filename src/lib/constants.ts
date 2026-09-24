@@ -31,6 +31,8 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     heroDesc:
       "Suplementos originales, precios reales y asesoramiento de verdad. Envíos a todo el país.",
     heroImagePath: null,
+    heroImageWidth: null,
+    heroImageHeight: null,
   },
   promos: {
     lines: [

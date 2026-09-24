@@ -16,6 +16,11 @@ export const generalSchema = z.object({
   heroTitle: trimmed.max(160).default(""),
   heroDesc: trimmed.max(400).default(""),
   heroImagePath: trimmed.max(300).nullable().default(null),
+  // Dimensiones reales del archivo. Se guardan para que el banner respete su
+  // proporcion y el navegador reserve la altura exacta antes de descargarlo:
+  // sin esto la pagina pega un salto cuando la imagen termina de cargar.
+  heroImageWidth: z.number().int().positive().max(20000).nullable().default(null),
+  heroImageHeight: z.number().int().positive().max(20000).nullable().default(null),
 });
 
 export const promosSchema = z.object({

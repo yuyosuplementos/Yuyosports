@@ -30,6 +30,29 @@ import type {
 export function HeroBanner({ general }: { general: GeneralSettings }) {
   const src = storagePublicUrl(general.heroImagePath);
   if (!src) return null;
+
+  const { heroImageWidth: width, heroImageHeight: height } = general;
+
+  // Con las dimensiones reales el banner se ve completo, en su proporcion,
+  // y el navegador reserva la altura exacta antes de descargarlo.
+  if (width && height) {
+    return (
+      <div className="w-full bg-brand-stone">
+        <Image
+          src={src}
+          alt=""
+          width={width}
+          height={height}
+          priority
+          sizes="100vw"
+          className="h-auto w-full"
+        />
+      </div>
+    );
+  }
+
+  // Banners cargados antes de que guardaramos las dimensiones: se mantiene
+  // el recorte a proporcion fija hasta que se vuelva a subir la imagen.
   return (
     <div className="relative aspect-[21/9] w-full bg-brand-stone md:aspect-[3/1]">
       <Image src={src} alt="" fill priority sizes="100vw" className="object-cover" />

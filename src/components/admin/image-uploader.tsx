@@ -25,6 +25,11 @@ import { toast } from "@/components/ui/toast";
  * next/image en cada tamaño de pantalla, así que recomprimir antes de
  * guardar no aportaba nada que no se estuviera haciendo igual.
  */
+export interface ImageDimensions {
+  width: number;
+  height: number;
+}
+
 export function ImageUploader({
   slug,
   value,
@@ -33,7 +38,8 @@ export function ImageUploader({
 }: {
   slug: string;
   value: string | null;
-  onChange: (path: string | null) => void;
+  /** `dimensions` llega solo cuando se sube un archivo, no al quitarlo. */
+  onChange: (path: string | null, dimensions?: ImageDimensions) => void;
   kind?: "products" | "settings";
 }) {
   const [busy, setBusy] = useState(false);
@@ -54,6 +60,11 @@ export function ImageUploader({
 
     setBusy(true);
     try {
+      // Las dimensiones reales se leen del archivo, no se piden al usuario.
+      const bitmap = await createImageBitmap(file);
+      const dimensions = { width: bitmap.width, height: bitmap.height };
+      bitmap.close();
+
       // Signed URL: el archivo va directo al bucket y no pasa por la función
       // serverless, que en Vercel topea el body en 4.5 MB.
       const signed = await createSignedUploadUrlAction(kind, slug, ext);
@@ -65,7 +76,7 @@ export function ImageUploader({
         .uploadToSignedUrl(signed.path, signed.token, file, { contentType: file.type });
       if (error) throw new Error(error.message);
 
-      onChange(signed.path);
+      onChange(signed.path, dimensions);
       toast(`Imagen subida (${(file.size / 1024).toFixed(0)} KB)`);
     } catch (e) {
       toast(e instanceof Error ? e.message : "No se pudo subir la imagen.");

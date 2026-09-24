@@ -74,7 +74,12 @@ function renderSection(key: SettingsKey, v: AnyRecord, patch: (k: string, v: unk
               kind="settings"
               slug="hero"
               value={str(v.heroImagePath) || null}
-              onChange={(p) => patch("heroImagePath", p)}
+              onChange={(path, dimensions) => {
+                // patch usa setState funcional, asi que las tres se acumulan.
+                patch("heroImagePath", path);
+                patch("heroImageWidth", dimensions?.width ?? null);
+                patch("heroImageHeight", dimensions?.height ?? null);
+              }}
             />
           </Group>
         </>
