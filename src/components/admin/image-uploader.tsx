@@ -6,44 +6,25 @@ import { faUpload, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Icon } from "@/components/ui/icon";
 import { createBrowserSupabase } from "@/lib/supabase/client";
 import { createSignedUploadUrlAction } from "@/lib/actions/storage";
-import { storagePublicUrl, PRODUCT_PLACEHOLDER } from "@/lib/utils/image";
+import {
+  storagePublicUrl,
+  PRODUCT_PLACEHOLDER,
+  ACCEPTED_IMAGE_TYPES,
+  MAX_IMAGE_BYTES,
+  extensionFor,
+} from "@/lib/utils/image";
 import { toast } from "@/components/ui/toast";
 
-const MAX_INPUT_BYTES = 15 * 1024 * 1024;
-const MAX_EDGE = 1600;
-
-/** Redimensiona y convierte a WebP en el navegador antes de subir. */
-async function toWebp(file: File): Promise<Blob> {
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
-  const w = Math.round(bitmap.width * scale);
-  const h = Math.round(bitmap.height * scale);
-
-  const canvas =
-    typeof OffscreenCanvas !== "undefined"
-      ? new OffscreenCanvas(w, h)
-      : Object.assign(document.createElement("canvas"), { width: w, height: h });
-
-  const ctx = canvas.getContext("2d") as
-    | CanvasRenderingContext2D
-    | OffscreenCanvasRenderingContext2D
-    | null;
-  if (!ctx) throw new Error("No se pudo procesar la imagen.");
-  ctx.drawImage(bitmap, 0, 0, w, h);
-  bitmap.close();
-
-  if (canvas instanceof OffscreenCanvas) {
-    return canvas.convertToBlob({ type: "image/webp", quality: 0.82 });
-  }
-  return new Promise<Blob>((resolve, reject) =>
-    (canvas as HTMLCanvasElement).toBlob(
-      (b) => (b ? resolve(b) : reject(new Error("No se pudo convertir la imagen."))),
-      "image/webp",
-      0.82,
-    ),
-  );
-}
-
+/**
+ * Sube la imagen TAL CUAL: sin redimensionar ni recomprimir.
+ *
+ * Antes se pasaba todo por un canvas a 1600px de lado máximo y se convertía
+ * a WebP. Para las fotos de producto originales (de hasta 4 MB) tenía
+ * sentido, pero le arruinaba el trabajo a quien prepara un banner con las
+ * medidas exactas que quiere. La optimización de entrega ya la hace
+ * next/image en cada tamaño de pantalla, así que recomprimir antes de
+ * guardar no aportaba nada que no se estuviera haciendo igual.
+ */
 export function ImageUploader({
   slug,
   value,
@@ -61,26 +42,31 @@ export function ImageUploader({
 
   async function handleFile(file: File) {
     if (!slug) return toast("Poné primero el nombre del producto.");
-    if (!file.type.startsWith("image/")) return toast("El archivo no es una imagen.");
-    if (file.size > MAX_INPUT_BYTES) return toast("La imagen es demasiado grande (máx. 15 MB).");
+
+    const ext = extensionFor(file.type);
+    if (!ext) {
+      return toast("Formato no admitido. Usá JPG, PNG, WebP o AVIF.");
+    }
+    if (file.size > MAX_IMAGE_BYTES) {
+      const mb = (file.size / 1024 / 1024).toFixed(1);
+      return toast(`La imagen pesa ${mb} MB y el máximo es ${MAX_IMAGE_BYTES / 1024 / 1024} MB.`);
+    }
 
     setBusy(true);
     try {
-      const blob = await toWebp(file);
-
       // Signed URL: el archivo va directo al bucket y no pasa por la función
       // serverless, que en Vercel topea el body en 4.5 MB.
-      const signed = await createSignedUploadUrlAction(kind, slug);
+      const signed = await createSignedUploadUrlAction(kind, slug, ext);
       if (!signed.ok) throw new Error(signed.error);
 
       const sb = createBrowserSupabase();
       const { error } = await sb.storage
         .from("media")
-        .uploadToSignedUrl(signed.path, signed.token, blob, { contentType: "image/webp" });
+        .uploadToSignedUrl(signed.path, signed.token, file, { contentType: file.type });
       if (error) throw new Error(error.message);
 
       onChange(signed.path);
-      toast(`Imagen subida (${(blob.size / 1024).toFixed(0)} KB)`);
+      toast(`Imagen subida (${(file.size / 1024).toFixed(0)} KB)`);
     } catch (e) {
       toast(e instanceof Error ? e.message : "No se pudo subir la imagen.");
     } finally {
@@ -106,7 +92,7 @@ export function ImageUploader({
         <input
           ref={inputRef}
           type="file"
-          accept="image/*"
+          accept={ACCEPTED_IMAGE_TYPES.join(",")}
           className="hidden"
           onChange={(e) => {
             const f = e.target.files?.[0];
@@ -133,7 +119,8 @@ export function ImageUploader({
           </button>
         )}
         <p className="max-w-xs text-[11px] text-brand-charcoal/40">
-          Se redimensiona a {MAX_EDGE}px y se convierte a WebP automáticamente.
+          Se sube tal cual, sin recortar ni recomprimir. JPG, PNG, WebP o AVIF, hasta{" "}
+          {MAX_IMAGE_BYTES / 1024 / 1024} MB.
         </p>
       </div>
     </div>

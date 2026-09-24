@@ -12,14 +12,21 @@ import { createServerSupabase } from "@/lib/supabase/server";
  * grande, con un error opaco de plataforma. Subiendo directo al Storage el
  * archivo no pasa por Vercel.
  */
+const ALLOWED_EXTENSIONS = ["jpg", "png", "webp", "avif"];
+
 export async function createSignedUploadUrlAction(
   kind: "products" | "settings",
   slug: string,
+  ext: string,
 ): Promise<{ ok: true; path: string; token: string } | { ok: false; error: string }> {
   if (!(await assertAdmin())) return { ok: false, error: "Sin permisos." };
 
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) {
     return { ok: false, error: "Slug inválido." };
+  }
+  // Se revalida en el server: el cliente no decide la extensión del objeto.
+  if (!ALLOWED_EXTENSIONS.includes(ext)) {
+    return { ok: false, error: "Formato no admitido." };
   }
 
   // El path SIEMPRE lleva timestamp, tambien en products.
@@ -30,7 +37,7 @@ export async function createSignedUploadUrlAction(
   // tienda como la vista previa del panel seguian mostrando la vieja, asi
   // que parecia que editar la imagen no funcionaba. Con el path versionado
   // la URL es inmutable y el cache largo deja de ser un problema.
-  const path = `${kind}/${slug}-${Date.now()}.webp`;
+  const path = `${kind}/${slug}-${Date.now()}.${ext}`;
 
   const sb = await createServerSupabase();
   const { data, error } = await sb.storage.from("media").createSignedUploadUrl(path);

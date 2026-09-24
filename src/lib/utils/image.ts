@@ -21,3 +21,31 @@ export const PRODUCT_PLACEHOLDER =
        </text>
      </svg>`,
   );
+
+/**
+ * Formatos y tamaño que acepta el bucket `media`.
+ *
+ * Deben coincidir con `allowed_mime_types` y `file_size_limit` de la
+ * migración 0006: si el navegador deja pasar algo que el bucket rechaza,
+ * el error llega desde Storage y es mucho menos claro.
+ */
+export const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/avif",
+] as const;
+
+export const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+
+const EXTENSIONS: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/avif": "avif",
+};
+
+/** Extensión para un mime admitido, o null si no lo está. */
+export function extensionFor(mime: string): string | null {
+  return EXTENSIONS[mime] ?? null;
+}
