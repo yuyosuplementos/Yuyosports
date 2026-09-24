@@ -1,10 +1,9 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/constants";
 import { getProducts } from "@/lib/data/products";
 import { getCategories, getBrands } from "@/lib/data/taxonomy";
 
-// Si falta la variable es un error de configuración: mejor que se note en
-// local a que se publique un sitemap apuntando a un dominio inventado.
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const BASE = SITE_URL;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [products, categories, brands] = await Promise.all([

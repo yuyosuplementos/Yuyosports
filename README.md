@@ -82,7 +82,12 @@ npm run dev     # http://localhost:3000  ·  panel en /admin
 ## Deploy
 
 Vercel, importando el repo. Framework detectado automáticamente. Cargá las tres variables
-de Supabase más `NEXT_PUBLIC_SITE_URL` con el dominio final (la usan `sitemap.xml` y `robots.txt`).
+de Supabase.
+
+El dominio público vive en `SITE_URL` (`src/lib/constants.ts`), no en una variable de
+entorno: es fijo, no es secreto, y cuando dependía de `NEXT_PUBLIC_SITE_URL` producción
+terminó publicando un sitemap apuntando a `localhost` porque la variable no estaba cargada.
+`NEXT_PUBLIC_SITE_URL` sigue sirviendo como override si hace falta.
 
 ---
 

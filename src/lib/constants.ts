@@ -1,5 +1,16 @@
 import type { SiteSettings } from "@/lib/schemas/settings";
 
+/**
+ * URL pública del sitio.
+ *
+ * Vive en el código a propósito: el dominio es fijo y no es un secreto, y
+ * dejarlo dependiendo de una variable de entorno hizo que producción
+ * publicara un sitemap apuntando a localhost cuando la variable faltaba.
+ * NEXT_PUBLIC_SITE_URL sigue funcionando como override (para previews o
+ * si algún día cambia el dominio).
+ */
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.yuyosport.ar";
+
 export const SITE = {
   name: "YUYO SPORTS",
   tagline: "Suplementación Deportiva Premium",

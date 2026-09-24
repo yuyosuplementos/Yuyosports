@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
-import { SITE } from "@/lib/constants";
+import { SITE, SITE_URL } from "@/lib/constants";
 import "@/lib/fontawesome";
 import "./globals.css";
 
@@ -21,7 +21,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   // Sin esto, las imágenes de Open Graph con ruta relativa se resuelven mal y
   // las previews al compartir el link (WhatsApp, Instagram) salen sin imagen.
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(SITE_URL),
   title: { default: `${SITE.name} | ${SITE.tagline}`, template: `%s | ${SITE.name}` },
   description: SITE.description,
   openGraph: {
