@@ -33,6 +33,15 @@ export async function saveProductAction(input: unknown): Promise<ActionResult> {
   };
 
   const sb = await createServerSupabase();
+
+  // Como cada subida crea un objeto nuevo (path con timestamp), hay que
+  // saber cual era el anterior para no dejar huerfanos en el bucket.
+  let previousImage: string | null = null;
+  if (p.id) {
+    const { data } = await sb.from("products").select("image_path").eq("id", p.id).maybeSingle();
+    previousImage = data?.image_path ?? null;
+  }
+
   const { error } = p.id
     ? await sb.from("products").update(row).eq("id", p.id)
     : await sb.from("products").insert(row);
@@ -40,6 +49,12 @@ export async function saveProductAction(input: unknown): Promise<ActionResult> {
   if (error) {
     if (error.code === "23505") return { ok: false, error: "Ya existe un producto con ese slug." };
     return { ok: false, error: error.message };
+  }
+
+  // Recien despues de guardar con exito: si fallara el borrado, el producto
+  // ya quedo bien y solo sobra un archivo.
+  if (previousImage && previousImage !== row.image_path) {
+    await sb.storage.from("media").remove([previousImage]);
   }
 
   invalidate("products");

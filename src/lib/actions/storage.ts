@@ -22,15 +22,18 @@ export async function createSignedUploadUrlAction(
     return { ok: false, error: "Slug inválido." };
   }
 
-  // settings/* lleva timestamp: el CDN cachea por path y sobrescribir
-  // hero.webp dejaria la imagen vieja servida por horas.
-  const path =
-    kind === "products" ? `products/${slug}.webp` : `settings/${slug}-${Date.now()}.webp`;
+  // El path SIEMPRE lleva timestamp, tambien en products.
+  //
+  // Sobrescribir `products/<slug>.webp` no alcanzaba: la URL publica no
+  // cambia, y next/image cachea el resultado optimizado con
+  // minimumCacheTTL = 1 año. La imagen nueva se subia bien, pero tanto la
+  // tienda como la vista previa del panel seguian mostrando la vieja, asi
+  // que parecia que editar la imagen no funcionaba. Con el path versionado
+  // la URL es inmutable y el cache largo deja de ser un problema.
+  const path = `${kind}/${slug}-${Date.now()}.webp`;
 
   const sb = await createServerSupabase();
-  const { data, error } = await sb.storage.from("media").createSignedUploadUrl(path, {
-    upsert: true,
-  });
+  const { data, error } = await sb.storage.from("media").createSignedUploadUrl(path);
   if (error || !data) return { ok: false, error: error?.message ?? "No se pudo firmar la subida." };
 
   return { ok: true, path: data.path, token: data.token };
